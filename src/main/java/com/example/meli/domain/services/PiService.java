@@ -2,12 +2,13 @@ package com.example.meli.domain.services;
 
 import com.example.meli.commons.utils.SerialPi;
 import com.example.meli.commons.utils.UtilFunction;
-import com.example.meli.commons.utils.UtilFunction.*;
 import com.example.meli.domain.models.NumberPi;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.logging.Logger;
 
 @Service
 public class PiService implements IPiService{
@@ -17,11 +18,13 @@ public class PiService implements IPiService{
         NumberPi number= new NumberPi(randomNumber,random,calculatedPi(random));
         return number;
     }
-
+    @Cacheable(cacheNames = "number_pi", key = "#numberUSer" ,unless = "#result == null")
     public NumberPi getPiNotRandom(int numberUSer) {
+        System.out.println("No estaba creado " + numberUSer + " se creará ");
         NumberPi number= new NumberPi(numberUSer,numberUSer,calculatedPi(numberUSer));
         return number;
     }
+
 
     public String calculatedPi(int decimales){
         SerialPi serie = new SerialPi(decimales);

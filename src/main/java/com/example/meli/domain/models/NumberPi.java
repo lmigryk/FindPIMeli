@@ -2,10 +2,15 @@ package com.example.meli.domain.models;
 
 import lombok.*;
 
+import javax.persistence.*;
+import java.io.Serializable;
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class NumberPi {
+
+public class NumberPi implements Serializable{
+
     @Getter
     @Setter
     private int param;
@@ -17,5 +22,4 @@ public class NumberPi {
     @Getter
     @Setter
     private String PiCalc;
-
 }

@@ -2,11 +2,13 @@ package com.example.meli;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
-
-@SpringBootApplication
+@EnableCaching
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class MeliTestApplication {
 
     public static void main(String[] args) {
