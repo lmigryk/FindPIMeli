@@ -3,7 +3,9 @@ package com.example.meli.commons.exception;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ApiExceptionBase extends RuntimeException{
+import javax.validation.ConstraintDeclarationException;
+
+public class ApiExceptionBase extends ConstraintDeclarationException {
     @Getter
     @Setter
     private final String userMessage;
@@ -15,8 +17,10 @@ public class ApiExceptionBase extends RuntimeException{
     private final String userMoreInfo;
 
     public ApiExceptionBase(String userMessage, String internalMessage, String userMoreInfo) {
+        super();
         this.userMessage = userMessage;
         this.internalMessage = internalMessage;
         this.userMoreInfo = userMoreInfo;
+
     }
 }

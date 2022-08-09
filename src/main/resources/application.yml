@@ -1,0 +1,5 @@
+server:
+  port : 8089
+
+max_random_precision: 100
+redis_enabled: 1

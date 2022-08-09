@@ -18,7 +18,7 @@ public class DtoResponseException {
 
     @Getter
     @Setter
-    private final String randomGenerate;
+    private final Integer randomGenerate;
 
     public DtoResponseException(String userMessage, String internalMessage, String userMoreInfo) {
         this.userMessage = userMessage;
@@ -27,7 +27,7 @@ public class DtoResponseException {
         this.randomGenerate = null;
     }
 
-    public DtoResponseException(String userMessage, String internalMessage, String userMoreInfo, String randomGenerate) {
+    public DtoResponseException(String userMessage, String internalMessage, String userMoreInfo, Integer randomGenerate) {
         this.userMessage = userMessage;
         this.internalMessage = internalMessage;
         this.userMoreInfo = userMoreInfo;
