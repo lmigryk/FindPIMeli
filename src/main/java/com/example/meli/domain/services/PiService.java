@@ -1,46 +1,64 @@
 package com.example.meli.domain.services;
 
+import com.example.meli.commons.exception.DeleteException;
 import com.example.meli.commons.utils.SerialPi;
-import com.example.meli.commons.utils.UtilFunction;
-import com.example.meli.domain.models.NumberPi;
+import com.example.meli.domain.models.BasePi;
+import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.logging.Logger;
+
 
 @Service
 public class PiService implements IPiService{
+    private final CacheManager cacheManager;
+    public PiService(CacheManager cacheManager) {
+        this.cacheManager = cacheManager;
+    }
 
-    public NumberPi getPiRandom(int randomNumber) {
-        int random = UtilFunction.calculatedRandom(randomNumber);
-        NumberPi number= new NumberPi(randomNumber,random,calculatedPi(random));
-        return number;
+    @Cacheable(cacheNames = "number_pi", key = "#random" ,unless = "#result == null")
+    public BasePi getPiRandom(int random, int paramNumber) {
+        System.out.println("No estaba creado " + random + " se creará ");
+        BasePi numberPi =  calculatedPi(random);
+        numberPi.setParam(paramNumber);
+        return numberPi;
     }
     @Cacheable(cacheNames = "number_pi", key = "#numberUSer" ,unless = "#result == null")
-    public NumberPi getPiNotRandom(int numberUSer) {
+    public BasePi getPiNotRandom(int numberUSer) {
         System.out.println("No estaba creado " + numberUSer + " se creará ");
-        NumberPi number= new NumberPi(numberUSer,numberUSer,calculatedPi(numberUSer));
-        return number;
+        return calculatedPi(numberUSer);
     }
 
 
-    public String calculatedPi(int decimales){
+    @SneakyThrows
+    public void deletePi(int numberUSer)  {
+        if (cacheManager.getCache("number_pi").get(numberUSer) != null) {
+            System.out.println("si vez este mensaje es por q se elimino  " + numberUSer);
+            cacheManager.getCache("number_pi").evict(numberUSer);
+        }
+        else{
+            throw new DeleteException("Not found number key in cache redis","DONT_DELETE","https://httpstatuses.com/409");
+        }
+
+    }
+
+    public BasePi calculatedPi(int decimales){
         SerialPi serie = new SerialPi(decimales);
         int incremento = 0;
-        BigDecimal sumatoria =  new BigDecimal(0), anteriorSumatoria = new BigDecimal(0);
+        BigDecimal sumatoria =  new BigDecimal(0), anteriorSumatoria;
         boolean variable = true;
         while (variable){
             anteriorSumatoria = sumatoria;
             sumatoria = sumatoria.add(serie.calculateIteration(incremento));
             incremento +=1;
-            variable = sumatoria.setScale(decimales, RoundingMode.FLOOR).equals(anteriorSumatoria.setScale(decimales, RoundingMode.FLOOR))
-                    ? false
-                    : true;
-
+            variable = !sumatoria.setScale(decimales, RoundingMode.FLOOR).equals(anteriorSumatoria.setScale(decimales, RoundingMode.FLOOR));
         }
-        return sumatoria.setScale(decimales, RoundingMode.FLOOR).toString();
+        return new BasePi(decimales,sumatoria.setScale(decimales, RoundingMode.FLOOR).toString());
 
     }
 

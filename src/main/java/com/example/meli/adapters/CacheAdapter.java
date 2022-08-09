@@ -39,7 +39,7 @@ public class CacheAdapter extends CachingConfigurerSupport {
     private static RedisCacheConfiguration createConfig(JdkSerializationRedisSerializer redisSerializer) {
         return RedisCacheConfiguration.defaultCacheConfig()
                 .disableCachingNullValues()
-                .entryTtl(Duration.of(1, ChronoUnit.MINUTES))
+                .entryTtl(Duration.of(5, ChronoUnit.MINUTES))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer));
     }
 
