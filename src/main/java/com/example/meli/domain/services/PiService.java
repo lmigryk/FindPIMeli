@@ -23,10 +23,9 @@ public class PiService implements IPiService{
     }
     @Override
     @Cacheable(cacheNames = "number_pi", key = "#random" ,unless = "#result == null")
-    public BasePi getPiRandom(int random, int paramNumber) {
+    public BasePi getPiRandom(int random) {
         System.out.println("No estaba creado " + random + " se creará ");
         BasePi numberPi =  calculatedPi(random);
-        numberPi.setParam(paramNumber);
         return numberPi;
     }
     @Override

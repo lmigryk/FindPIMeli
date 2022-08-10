@@ -9,7 +9,7 @@ import com.example.meli.domain.models.BasePi;
 import javax.validation.constraints.Min;
 
 public interface IPiService {
-    BasePi getPiRandom(int randomNumber, int param);
+    BasePi getPiRandom(int randomNumber);
     BasePi getPiNotRandom( int number);
     void deletePi( int number) ;
 }

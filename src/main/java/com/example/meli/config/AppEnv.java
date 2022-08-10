@@ -18,8 +18,5 @@ public class AppEnv {
     @Value("${redis_enabled}")
     private  int redisEnabled;
 
-    public void show(){
-            System.out.println(String.format("My properties are:", maxRandomPrecision, redisEnabled));
-        }
 
 }

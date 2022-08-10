@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class RandomValidImp implements BasicValid {
     @Autowired
     private AppEnv appEnv;
+
     @Override
     public void validator(Integer random) throws ApiExceptionBase {
         if ( random >= appEnv.getMaxRandomPrecision()) {

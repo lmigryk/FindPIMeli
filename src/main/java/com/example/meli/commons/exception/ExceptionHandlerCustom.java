@@ -22,8 +22,6 @@ public class ExceptionHandlerCustom extends ResponseEntityExceptionHandler {
                 e.getInternalMessage(),
                 e.getUserMoreInfo(),
                 e.getRandomGenerate());
-
-
         return new ResponseEntity<>(ex, HttpStatus.CONFLICT);
     }
 

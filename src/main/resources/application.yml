@@ -1,5 +1,5 @@
 server:
   port : 8089
 
-max_random_precision: 100
+max_random_precision: 50
 redis_enabled: 1

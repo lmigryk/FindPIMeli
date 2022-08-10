@@ -21,7 +21,8 @@ public class CacheAdapter extends CachingConfigurerSupport {
 
    @Bean
     public LettuceConnectionFactory redisConnectionFactory(){
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("localhost", 6379));
+       // TODO: cambiar redis por localhost y bis
+        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("redis", 6379));
     }
 
     @Bean

@@ -1,0 +1,15 @@
+version: '3'
+services:
+  backend:
+    build: .
+    ports:
+      - "8089:8089"
+    links:
+      - redis
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+        - 6379:6379
+
