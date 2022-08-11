@@ -1,6 +1,9 @@
 version: '3'
 services:
   backend:
+    environment:
+      - MAX_RANDOM_PRECISION=25
+      - REDIS_ENABLED=1
     build: .
     ports:
       - "8089:8089"

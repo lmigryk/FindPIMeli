@@ -8,13 +8,15 @@ import javax.validation.ConstraintDeclarationException;
 public class ApiExceptionBase extends ConstraintDeclarationException {
     @Getter
     @Setter
-    private final String userMessage;
+    private  String userMessage;
+
     @Getter
     @Setter
-    private final String internalMessage;
+    private  String internalMessage;
+
     @Getter
     @Setter
-    private final String userMoreInfo;
+    private  String userMoreInfo;
 
     public ApiExceptionBase(String userMessage, String internalMessage, String userMoreInfo) {
         super();

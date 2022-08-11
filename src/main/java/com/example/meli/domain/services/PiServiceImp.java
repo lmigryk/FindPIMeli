@@ -1,35 +1,35 @@
 package com.example.meli.domain.services;
 
 import com.example.meli.commons.dto.DtoResponseDelete;
-import com.example.meli.commons.exception.ApiExceptionBase;
 import com.example.meli.commons.exception.DeleteException;
 import com.example.meli.commons.utils.SerialPi;
-import com.example.meli.commons.validator.RandomConstraint;
 import com.example.meli.domain.models.BasePi;
-import lombok.SneakyThrows;
+
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
 @Validated
 @Service
-public class PiService implements IPiService{
-    private final CacheManager cacheManager;
-    private final DtoResponseDelete = 
-    private final
-    public PiService(CacheManager cacheManager) {
+public class PiServiceImp implements PiService {
+
+    private final CacheManager cacheManager ;
+    private final DtoResponseDelete response = new DtoResponseDelete();
+
+    public PiServiceImp(CacheManager cacheManager) {
         this.cacheManager = cacheManager;
     }
     @Override
     @Cacheable(cacheNames = "number_pi", key = "#random" ,unless = "#result == null")
     public BasePi getPiRandom(int random) {
         System.out.println("No estaba creado " + random + " se creará ");
-        BasePi numberPi =  calculatedPi(random);
-        return numberPi;
+        return calculatedPi(random);
     }
     @Override
     @Cacheable(cacheNames = "number_pi", key = "#numberUSer" ,unless = "#result == null")
@@ -38,12 +38,34 @@ public class PiService implements IPiService{
         return calculatedPi(numberUSer);
     }
 
-    @Override
+/*    @Override
     @SneakyThrows
-    public String deletePi(int numberUSer)  {
-        if (cacheManager.getCache("number_pi").get(numberUSer) != null) {
+    public DtoResponseDelete deletePi2(int numberUSer)  {
+        System.out.println("hola");
+        if (Objects.requireNonNull(cacheManager.getCache("number_pi")).get(numberUSer) != null) {
             System.out.println("si vez este mensaje es por q se elimino  " + numberUSer);
-            cacheManager.getCache("number_pi").evict(numberUSer);
+            Objects.requireNonNull(cacheManager.getCache("number_pi")).evict(numberUSer);
+            response.setMessage("Num delete correctly");
+            response.setNumber(numberUSer);
+            return response;
+        }
+        else{
+            throw new DeleteException("Not found number key in cache redis","DONT_DELETE","https://httpstatuses.com/409");
+        }
+
+    }*/
+
+    @Override
+    @CacheEvict(cacheNames = "number_pi", key = "#numberUSer")
+    public DtoResponseDelete deletePi(int numberUSer)  {
+        System.out.println("hola");
+        Cache cache = cacheManager.getCache("number_pi");
+        System.out.println("hola");
+        if (cache.get(numberUSer) != null) {
+            System.out.println("si vez este mensaje es por q se elimino  " + numberUSer);
+            response.setMessage("Num delete correctly");
+            response.setNumber(numberUSer);
+            return response;
         }
         else{
             throw new DeleteException("Not found number key in cache redis","DONT_DELETE","https://httpstatuses.com/409");

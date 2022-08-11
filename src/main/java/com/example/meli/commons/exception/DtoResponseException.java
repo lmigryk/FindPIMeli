@@ -8,17 +8,17 @@ import lombok.Setter;
 public class DtoResponseException {
     @Getter
     @Setter
-    private final String userMessage;
+    private  String userMessage;
     @Getter
     @Setter
-    private final String internalMessage;
+    private  String internalMessage;
     @Getter
     @Setter
-    private final String userMoreInfo;
+    private  String userMoreInfo;
 
     @Getter
     @Setter
-    private final Integer randomGenerate;
+    private  Integer randomGenerate;
 
     public DtoResponseException(String userMessage, String internalMessage, String userMoreInfo) {
         this.userMessage = userMessage;

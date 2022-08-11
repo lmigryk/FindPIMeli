@@ -1,8 +1,5 @@
 package com.example.meli.commons.utils;
 
-import com.example.meli.commons.validator.RandomValidImp;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -4,9 +4,8 @@ import com.example.meli.commons.utils.UtilFunction;
 import com.example.meli.commons.validator.RandomValidImp;
 import com.example.meli.commons.validator.RedisValidImp;
 import com.example.meli.domain.models.BasePi;
-import com.example.meli.domain.services.IPiService;
+import com.example.meli.domain.services.PiService;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,16 +17,14 @@ import javax.validation.constraints.Min;
 @Validated
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/")
-@Slf4j
 @RestController
 public class PiController {
-    private final IPiService servicio;
+    private final  PiService servicio;
     private final RedisValidImp validatorRedis;
     private final UtilFunction util;
-
     private final RandomValidImp randomValidImp;
 
-    public PiController(IPiService servicio, RedisValidImp validatorRedis, UtilFunction util, RandomValidImp randomValidImp) {
+    public PiController(PiService servicio, RedisValidImp validatorRedis, UtilFunction util, RandomValidImp randomValidImp) {
         this.servicio = servicio;
         this.validatorRedis = validatorRedis;
         this.util = util;
@@ -42,7 +39,7 @@ public class PiController {
         this.randomValidImp.validator(random);
         BasePi n= servicio.getPiRandom(random);
         n.setParam(input_number);
-        return new ResponseEntity<>(n, HttpStatus.CREATED);
+        return new ResponseEntity<>(n, HttpStatus.OK);
 
     }
 
@@ -52,7 +49,7 @@ public class PiController {
         this.validatorRedis.validator();
         BasePi n= servicio.getPiNotRandom(random_number);
         n.setParam(null);
-        return new ResponseEntity<>(n, HttpStatus.CREATED);
+        return new ResponseEntity<>(n, HttpStatus.OK);
 
     }
 
@@ -60,8 +57,7 @@ public class PiController {
     public ResponseEntity<?> evictPiCache(
             @RequestParam(value="random_number") @Min(1) Integer random_number) {
         this.validatorRedis.validator();
-        servicio.deletePi(random_number);
-        return new ResponseEntity<>( HttpStatus.OK);
+        return new ResponseEntity<>(servicio.deletePi(random_number), HttpStatus.OK);
 
     }
 }
