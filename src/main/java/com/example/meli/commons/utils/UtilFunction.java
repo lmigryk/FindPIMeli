@@ -10,7 +10,6 @@ public class UtilFunction {
     }
     public int calculatedRandom(int max){
         int min = max/2;
-        int random = (int) (Math.random() * (max - min)) + min;
-        return random;
+        return (int) (Math.random() * (max - min)) + min;
     }
 }

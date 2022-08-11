@@ -24,8 +24,8 @@ public class PiController {
     private final UtilFunction util;
     private final RandomValidImp randomValidImp;
 
-    public PiController(PiService servicio, RedisValidImp validatorRedis, UtilFunction util, RandomValidImp randomValidImp) {
-        this.servicio = servicio;
+    public PiController(PiService service, RedisValidImp validatorRedis, UtilFunction util, RandomValidImp randomValidImp) {
+        this.servicio = service;
         this.validatorRedis = validatorRedis;
         this.util = util;
         this.randomValidImp = randomValidImp;

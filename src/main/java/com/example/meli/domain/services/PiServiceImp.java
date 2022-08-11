@@ -2,6 +2,7 @@ package com.example.meli.domain.services;
 
 import com.example.meli.commons.dto.DtoResponseDelete;
 import com.example.meli.commons.exception.DeleteException;
+import com.example.meli.commons.constants.ExceptionEnum;
 import com.example.meli.commons.utils.SerialPi;
 import com.example.meli.domain.models.BasePi;
 
@@ -38,37 +39,19 @@ public class PiServiceImp implements PiService {
         return calculatedPi(numberUSer);
     }
 
-/*    @Override
-    @SneakyThrows
-    public DtoResponseDelete deletePi2(int numberUSer)  {
-        System.out.println("hola");
-        if (Objects.requireNonNull(cacheManager.getCache("number_pi")).get(numberUSer) != null) {
-            System.out.println("si vez este mensaje es por q se elimino  " + numberUSer);
-            Objects.requireNonNull(cacheManager.getCache("number_pi")).evict(numberUSer);
-            response.setMessage("Num delete correctly");
-            response.setNumber(numberUSer);
-            return response;
-        }
-        else{
-            throw new DeleteException("Not found number key in cache redis","DONT_DELETE","https://httpstatuses.com/409");
-        }
-
-    }*/
-
     @Override
     @CacheEvict(cacheNames = "number_pi", key = "#numberUSer")
     public DtoResponseDelete deletePi(int numberUSer)  {
-        System.out.println("hola");
         Cache cache = cacheManager.getCache("number_pi");
-        System.out.println("hola");
         if (cache.get(numberUSer) != null) {
-            System.out.println("si vez este mensaje es por q se elimino  " + numberUSer);
-            response.setMessage("Num delete correctly");
+            response.setMessage("Number pi deleted correctly");
             response.setNumber(numberUSer);
             return response;
         }
         else{
-            throw new DeleteException("Not found number key in cache redis","DONT_DELETE","https://httpstatuses.com/409");
+            throw new DeleteException(ExceptionEnum.DELETE_INFO.getData(),
+                    ExceptionEnum.DELETE_MESSAGE.getData(),
+                    ExceptionEnum.DELETE_URL.getData());
         }
 
     }
@@ -83,9 +66,8 @@ public class PiServiceImp implements PiService {
             incremento +=1;
             variable = !sumatoria.setScale(decimales, RoundingMode.FLOOR).equals(anteriorSumatoria.setScale(decimales, RoundingMode.FLOOR));
         }
-        BasePi result = new BasePi(decimales,sumatoria.setScale(decimales, RoundingMode.FLOOR).toString());
 
-        return result;
+        return new BasePi(decimales,sumatoria.setScale(decimales, RoundingMode.FLOOR).toString());
 
     }
 

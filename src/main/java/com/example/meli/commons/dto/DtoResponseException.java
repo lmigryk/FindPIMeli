@@ -1,4 +1,4 @@
-package com.example.meli.commons.exception;
+package com.example.meli.commons.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

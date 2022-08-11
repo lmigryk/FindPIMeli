@@ -1,6 +1,5 @@
-package com.example.meli.controller;
+package com.example.meli;
 
-import com.example.meli.adapters.controllers.PiController;
 import com.example.meli.commons.dto.DtoResponseDelete;
 import com.example.meli.commons.exception.DeleteException;
 import com.example.meli.commons.exception.RandomException;
@@ -10,15 +9,19 @@ import com.example.meli.commons.validator.RandomValidImp;
 import com.example.meli.commons.validator.RedisValidImp;
 import com.example.meli.domain.models.BasePi;
 import com.example.meli.domain.services.PiService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 
 import static org.mockito.Mockito.doThrow;
@@ -27,12 +30,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(MockitoExtension.class)
-@WebMvcTest(PiController.class)
-public class ControllerTest {
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class IntegrationTest {
+
+    private MockMvc mvc;
 
     @Autowired
-    private MockMvc mvc;
+    private WebApplicationContext wac;
 
     @MockBean
     private PiService servicio;
@@ -46,6 +52,12 @@ public class ControllerTest {
     @MockBean
     private  RandomValidImp randomValidImp;
 
+    @BeforeAll
+    public void setup() {
+
+        this.mvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+
+    }
 
 
     @Test

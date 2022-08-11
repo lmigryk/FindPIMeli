@@ -10,21 +10,21 @@ import java.math.MathContext;
 public class SerialPi {
     private int precision;
 
-    public BigDecimal calculateIteration(int incremento){
-        BigDecimal primerNumerador = calculateNumeradorValue(4, incremento, 1);
-        BigDecimal segundoNumerador = calculateNumeradorValue(2, incremento, 4);
-        BigDecimal tercerNumerador = calculateNumeradorValue(1, incremento, 5);
-        BigDecimal cuartoNumerador = calculateNumeradorValue(1, incremento, 6);
+    public BigDecimal calculateIteration(int increment){
+        BigDecimal primerNumerador = calculateNumeradorValue(4, increment, 1);
+        BigDecimal segundoNumerador = calculateNumeradorValue(2, increment, 4);
+        BigDecimal tercerNumerador = calculateNumeradorValue(1, increment, 5);
+        BigDecimal cuartoNumerador = calculateNumeradorValue(1, increment, 6);
         BigDecimal sumaNumeradores = sumNumeradores(primerNumerador,segundoNumerador,tercerNumerador,cuartoNumerador);
-        BigDecimal denominadorFormula = new BigDecimal("16").pow(incremento);
+        BigDecimal denominadorFormula = new BigDecimal("16").pow(increment);
         return sumaNumeradores.divide(denominadorFormula);
 
     }
 
-    private BigDecimal calculateNumeradorValue(int numerador, int incrementador, int numSuma) {
-        int denominador = (8 * incrementador + numSuma);
-        BigDecimal nume = new BigDecimal(numerador);
-        BigDecimal res = nume.divide(new BigDecimal(denominador), new MathContext(this.precision));
+    private BigDecimal calculateNumeradorValue(int numerator, int incremental, int numSuma) {
+        int denominador = (8 * incremental + numSuma);
+        BigDecimal num = new BigDecimal(numerator);
+        BigDecimal res = num.divide(new BigDecimal(denominador), new MathContext(this.precision));
         return res;
     }
     private  BigDecimal sumNumeradores(BigDecimal n1, BigDecimal n2, BigDecimal n3, BigDecimal n4) {

@@ -2,7 +2,6 @@ package com.example.meli.commons.dto;
 
 import lombok.*;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 public class DtoResponseDelete {

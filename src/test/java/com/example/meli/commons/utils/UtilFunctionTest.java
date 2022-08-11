@@ -3,10 +3,10 @@ package com.example.meli.commons.utils;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.junit.jupiter.MockitoExtension;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 
 public class UtilFunctionTest {
 
