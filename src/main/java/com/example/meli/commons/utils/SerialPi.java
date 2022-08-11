@@ -16,7 +16,7 @@ public class SerialPi {
         BigDecimal tercerNumerador = calculateNumeradorValue(1, incremento, 5);
         BigDecimal cuartoNumerador = calculateNumeradorValue(1, incremento, 6);
         BigDecimal sumaNumeradores = sumNumeradores(primerNumerador,segundoNumerador,tercerNumerador,cuartoNumerador);
-        BigDecimal denominadorFormula = new BigDecimal(Math.pow(16, incremento));
+        BigDecimal denominadorFormula = new BigDecimal("16").pow(incremento);
         return sumaNumeradores.divide(denominadorFormula);
 
     }
