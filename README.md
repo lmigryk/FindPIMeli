@@ -146,7 +146,7 @@ Las variables de entorno MAX_RANDOM_PRECISION y REDIS_ENABLED se encuentran conf
 
 De querer actualizar, cambiar los valores en docker-compose y levantar nuevamente los servicios.
 
-<pre><code>make --file makefile.mk compile docker-run</code></pre>
+<pre><code>docker compose up -d --build</code></pre>
 
 ## Intalación de microservicio dockerizados
 
@@ -184,6 +184,46 @@ En caso de tener cualquier problema con el makefile, levantar el proyecto de for
 
 ## Test de performance
 
+Se ha dejado un script con pruebas de cargar de las tres funciones requeridas. Para correr los test de carga:
+
+Ingresar desde la raiz del proyecto a la carpeta k6 y ejecutar el siguiente comando:
+
+Desde powershell de windows
+<pre><code>cat test.js | docker run --network host --rm -i grafana/k6 run -</code></pre>
+
+Desde consola Unix:
+```
+docker run --network host --rm -i grafana/k6 run -<test.js
+```
+
+Ejemplo de salida tras pasar Test
+
+```
+default ✓ [ 100% ] 0/2 VUs  22s
+
+     ✗ is status 409
+      ↳  0% — ✓ 143 / ✗ 16265
+     ✓ is status 200
+
+     checks.........................: 66.95% ✓ 32959       ✗ 16265
+     data_received..................: 14 MB  627 kB/s
+     data_sent......................: 5.5 MB 248 kB/s
+     http_req_blocked...............: avg=2.51µs   min=641ns    med=1.02µs   max=1.11ms   p(90)=1.38µs   p(95)=1.8µs
+     http_req_connecting............: avg=946ns    min=0s       med=0s       max=1.04ms   p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=571.68µs min=270.17µs med=475.42µs max=9.92ms   p(90)=860.71µs p(95)=904.64µs
+       { expected_response:true }...: avg=572.03µs min=270.17µs med=475.68µs max=9.92ms   p(90)=860.81µs p(95)=904.68µs
+     http_req_failed................: 0.29%  ✓ 143         ✗ 49081
+     http_req_receiving.............: avg=28.25µs  min=-84295ns med=26.03µs  max=748.38µs p(90)=40.91µs  p(95)=47.82µs
+     http_req_sending...............: avg=5.69µs   min=3.09µs   med=4.63µs   max=663.12µs p(90)=6.42µs   p(95)=9.66µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=537.73µs min=222.63µs med=442.55µs max=9.79ms   p(90)=826.7µs  p(95)=866.02µs
+     http_reqs......................: 49224  2237.354448/s
+     iteration_duration.............: avg=1.85ms   min=1.46ms   med=1.79ms   max=12.32ms  p(90)=2ms      p(95)=2.15ms
+     iterations.....................: 16408  745.784816/s
+     vus............................: 1      min=1         max=2
+     vus_max........................: 2      min=2         max=2
+
+```
 ## Seguridad de la API
 
 > This block quote is here for your information

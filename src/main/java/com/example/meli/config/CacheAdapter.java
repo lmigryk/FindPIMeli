@@ -1,4 +1,4 @@
-package com.example.meli.adapters;
+package com.example.meli.config;
 
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.context.annotation.Bean;
