@@ -3,7 +3,10 @@ package com.example.meli.controller;
 import com.example.meli.adapters.controllers.PiController;
 import com.example.meli.commons.dto.DtoResponseDelete;
 import com.example.meli.commons.exception.DeleteException;
+import com.example.meli.commons.exception.RandomException;
 import com.example.meli.commons.exception.RedisExceptionCustom;
+import com.example.meli.commons.utils.UtilFunction;
+import com.example.meli.commons.validator.RandomValidImp;
 import com.example.meli.commons.validator.RedisValidImp;
 import com.example.meli.domain.models.BasePi;
 import com.example.meli.domain.services.PiService;
@@ -37,14 +40,28 @@ public class ControllerTest {
     @MockBean
     private RedisValidImp validatorRedis;
 
+    @MockBean
+    private UtilFunction util;
+
+    @MockBean
+    private RandomValidImp randomValidImp;
 
 
 
     @Test
     public void getPiRandomControllerTest() throws Exception {
         BasePi numero= new BasePi(80,"3.14");
-        Mockito.when(servicio.getPiRandom(80)).thenReturn(numero);
+        Mockito.when(servicio.getPiRandom(20)).thenReturn(numero);
+        Mockito.when(util.calculatedRandom(80)).thenReturn(20);
         this.mvc.perform(get("/getpi_random?input_number=80")).andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    public void getPiRandomControllerTestFail() throws Exception {
+
+        Mockito.when(util.calculatedRandom(80)).thenReturn(20);
+        doThrow(new RandomException("","","",24)).when(randomValidImp).validator(20);
+        this.mvc.perform(get("/getpi_random?input_number=80")).andDo(print()).andExpect(status().isConflict());
     }
 
     @Test
@@ -77,7 +94,7 @@ public class ControllerTest {
     @Test
     public void evictPiTestFailDelete() throws Exception {
         doThrow(new DeleteException("","","")).when(servicio).deletePi(24);
-        this.mvc.perform(delete("/deletePi?random_number=24")).andDo(print()).andExpect(status().isConflict());
+        this.mvc.perform(delete("/deletePi?random_number=24")).andDo(print()).andExpect(status().isNotFound());
     }
 
 

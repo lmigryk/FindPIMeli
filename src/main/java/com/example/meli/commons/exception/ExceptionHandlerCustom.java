@@ -40,7 +40,7 @@ public class ExceptionHandlerCustom extends ResponseEntityExceptionHandler {
                 e.getInternalMessage(),
                 e.getUserMoreInfo());
 
-        return new ResponseEntity<>(ex, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(ex, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

@@ -34,7 +34,7 @@ Software externos:
 
 * Postman -> Para probar el servicio a traves de llamadas http
 
-* Apache jmatter -> Para pruebas de carga
+* K6-> Para pruebas de carga
 
 ## Consideraciones Generales
 
@@ -102,8 +102,27 @@ El proyecto se divide en 4 carpetas principales:
 * Domain: Se encuentran tanto los modelos como los servicios construidos.
 
 ## Diagrama de la solución
+### Diagrama de arquitectura
+Para vizualizar el diagrama de arquitectura, dirigirse a este [link](https://drive.google.com/file/d/1EzXQ75O2VzY9N-TQLcjQDhW_zGDC5340/view?usp=sharing)
 
-Para vizualizar el diagrama, dirigirse a este [link](https://drive.google.com/file/d/1EzXQ75O2VzY9N-TQLcjQDhW_zGDC5340/view?usp=sharing)
+![DIAGRAMA DE ARQUITECTURA](/data/arquitectura.jpg)
+
+
+
+### Diagrama de flujos
+
+Para vizualizar el diagrama de flujo de todos los flujos, lo puedes ver en el siguiente [link](https://drive.google.com/file/d/1EzXQ75O2VzY9N-TQLcjQDhW_zGDC5340/view?usp=sharing)
+
+Flujo Get Pi Random
+![Flujo Pi Random](/data/flujo1.jpg)
+
+Flujo Get Pi NO Random
+
+![Flujo Pi no Random](/data/flujo2.png)
+
+Flujo Delete from cache
+
+![Flujo delete](/data/Flujo3.png)
 
 ## Parámetros de configuración del microservicio
 
