@@ -1,0 +1,8 @@
+server:
+  port : 8089
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+max_random_precision: 50
+redis_enabled: 1

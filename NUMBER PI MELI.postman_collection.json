@@ -1,0 +1,459 @@
+{
+	"info": {
+		"_postman_id": "4fec13df-8c06-4ed2-8f82-3f9e621c956e",
+		"name": "NUMBER PI MELI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2975020"
+	},
+	"item": [
+		{
+			"name": "Get Pi Random",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc0ODNhMDg4ZDRmZmMwMDYwOWYwZTIyZjNjMjJkYTVmZTM5MDZjY2MiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAwOTQ5MTE2MzAzNjYyNTY0NDUyIiwiaGQiOiJmYWxhYmVsbGEuY2wiLCJlbWFpbCI6ImxpbWlncnlrQGZhbGFiZWxsYS5jbCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoicllYMVMtSmdqalhQb2JkTHZId3FkZyIsImlhdCI6MTY1NDcwNDM0OCwiZXhwIjoxNjU0NzA3OTQ4LCJqdGkiOiIyY2NmMDVkMGZjZWRhNzA1YWIxMDE5YzcxMjJlZmRkNWUwNWY4MDllIn0.rLPwTr3TcwLjSZ73ME5YXV-PToB3JT0725ULTWLkQkSnSugR84idRWmgYCr-6l_ESNxdtWBLByA9Sli73hByN1sfVEA4oFIdfvERBJB5BqhdUTbGwYRxuXHuVl9JlGVJsN7LGz_LBm5X9frpO9p7onC_fXVrxYBmeLJlbMLBe6IBpn2uV0SKzpvkMxAoYoPH8wfTbfX-UTNc6GRmR8tTGZIVNFYJ1rwImi0YmfrxvGFt1m9EPuQ_p0ttZS0btg5j0CxHOHpc1cLaqNfQPylJu0sLIgJfpWOzIadvPRpKn9a-Hprfha8N9ov9lU0TuG0RM5VIy9feLrVvMQTAXxuYiA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8089/api/v1/getpi_random?input_number=40",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"api",
+						"v1",
+						"getpi_random"
+					],
+					"query": [
+						{
+							"key": "input_number",
+							"value": "40"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8089/api/v1/getpi_random?input_number=40",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8089/api/v1/getpi_random?input_number=40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"api",
+								"v1",
+								"getpi_random"
+							],
+							"query": [
+								{
+									"key": "input_number",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Aug 2022 21:23:24 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userMessage\": \"Random parameter would cause overflow\",\n    \"internalMessage\": \"CONFLICT_RANDOM_NOT_VALID\",\n    \"userMoreInfo\": \"https://httpstatuses.com/409\",\n    \"randomGenerate\": 38\n}"
+				},
+				{
+					"name": "http://localhost:8089/api/v1/getpi_random?input_number=40",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8089/api/v1/getpi_random?input_number=40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"api",
+								"v1",
+								"getpi_random"
+							],
+							"query": [
+								{
+									"key": "input_number",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Aug 2022 21:23:51 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"param\": 40,\n    \"random\": 24,\n    \"piCalc\": \"3.141592653589793238462642\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GET PI",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/api/v1/getpi?random_number=38",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"api",
+						"v1",
+						"getpi"
+					],
+					"query": [
+						{
+							"key": "random_number",
+							"value": "38"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8089/api/v1/getpi?random_number=38",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/api/v1/getpi?random_number=61",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"api",
+								"v1",
+								"getpi"
+							],
+							"query": [
+								{
+									"key": "random_number",
+									"value": "61"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Aug 2022 21:22:59 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"random\": 61,\n    \"piCalc\": \"3.1415926535897932384626433832795028841971693993751058209749445\"\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE PI",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/api/v1/deletePi?random_number=61",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"api",
+						"v1",
+						"deletePi"
+					],
+					"query": [
+						{
+							"key": "random_number",
+							"value": "61"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8089/api/v1/deletePi?random_number=61",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/api/v1/deletePi?random_number=22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"api",
+								"v1",
+								"deletePi"
+							],
+							"query": [
+								{
+									"key": "random_number",
+									"value": "22"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Aug 2022 21:22:38 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Number pi deleted correctly\",\n    \"number\": 22\n}"
+				},
+				{
+					"name": "http://localhost:8089/api/v1/deletePi?random_number=61",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/api/v1/deletePi?random_number=61",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"api",
+								"v1",
+								"deletePi"
+							],
+							"query": [
+								{
+									"key": "random_number",
+									"value": "61"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Aug 2022 13:30:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userMessage\": \"Not found number key in cache redis\",\n    \"internalMessage\": \"DONT_DELETE\",\n    \"userMoreInfo\": \"https://httpstatuses.com/404\"\n}"
+				}
+			]
+		}
+	]
+}
