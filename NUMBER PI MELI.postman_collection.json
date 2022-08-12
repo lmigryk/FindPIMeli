@@ -348,71 +348,6 @@
 							]
 						}
 					},
-					"status": "Conflict",
-					"code": 409,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Vary",
-							"value": "Origin"
-						},
-						{
-							"key": "Vary",
-							"value": "Access-Control-Request-Method"
-						},
-						{
-							"key": "Vary",
-							"value": "Access-Control-Request-Headers"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "Transfer-Encoding",
-							"value": "chunked"
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 11 Aug 2022 21:22:11 GMT"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=60"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"userMessage\": \"Not found number key in cache redis\",\n    \"internalMessage\": \"DONT_DELETE\",\n    \"userMoreInfo\": \"https://httpstatuses.com/409\"\n}"
-				},
-				{
-					"name": "http://localhost:8089/api/v1/deletePi?random_number=61",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8089/api/v1/deletePi?random_number=22",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8089",
-							"path": [
-								"api",
-								"v1",
-								"deletePi"
-							],
-							"query": [
-								{
-									"key": "random_number",
-									"value": "22"
-								}
-							]
-						}
-					},
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
@@ -452,6 +387,71 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"message\": \"Number pi deleted correctly\",\n    \"number\": 22\n}"
+				},
+				{
+					"name": "http://localhost:8089/api/v1/deletePi?random_number=61",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/api/v1/deletePi?random_number=61",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"api",
+								"v1",
+								"deletePi"
+							],
+							"query": [
+								{
+									"key": "random_number",
+									"value": "61"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Aug 2022 13:30:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userMessage\": \"Not found number key in cache redis\",\n    \"internalMessage\": \"DONT_DELETE\",\n    \"userMoreInfo\": \"https://httpstatuses.com/404\"\n}"
 				}
 			]
 		}

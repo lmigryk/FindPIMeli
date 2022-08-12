@@ -2,11 +2,11 @@
 
 ## Descripción de la solución
 
-Se necesita implementar una API que permita a través de peticiones HTTP  retornar la cantidad de decimales de número PI (π), si este no se encuentra en una cache, se debe hacer el calculo, de lo contrario, la cache debe devolver el registro. Es por esto que se realiza una investigación para encontrar la forma más eficiente para realizare esta búsqueda de decimales.
+Se necesita implementar una API que permita a través de peticiones HTTP  retornar la cantidad de decimales de número PI (π), si este no se encuentra en una cache, se debe hacer el cálculo, de lo contrario, la cache debe devolver el registro. Es por esto que se realiza una investigación para encontrar la forma más eficiente para realizar este cálculo de decimales.
 
 Existen varios métodos por los cuales se pueden calcular de forma aproximada los decimales de PI (π) y una de las más eficientes es a través de [La fórmula de BPP](https://mathworld.wolfram.com/BBPFormula.html), por lo que es la indicada para el desarrollo del proyecto.
 
-El proyecto va a contener dos microservicios el primero será una api desarrollada en Java 11, bajo el alero de Springboot y una cache Distribuida de Redis. Ambos estarán dockerizadas y se iniciarán por medio del archivo docker-compose.yml
+El proyecto va a contener dos microservicios el primero será una API desarrollada en Java 11, bajo el alero de Springboot y una cache Distribuida de Redis. Ambos estarán dockerizadas y se iniciarán por medio del archivo docker-compose.yml
 
 ## Stack Tecnológico
 
@@ -40,9 +40,9 @@ Software externos:
 
 * La colección de postman de encuentra en la raiz del proyecto, al igual que el makefile, DockerFile y docker-compose.yml
 
-* El algoritmo empleado es uno de los más certeros, puede varia al momento de aproximar en el último dígito del decimal obtenido.
+* El algoritmo empleado es uno de los más certeros, que puede variar al momento de aproximar en el último dígito del decimal calculado.
 
-* Para efectos de la programa, el número mínimo que debe ingresar el usario es 1.
+* Para efectos de programa, el número mínimo que puede ingresar el usuario es 1.
 
 * La configuración Redis es la por default, por lo que no posee usuario ni contraseña.
 
@@ -53,6 +53,8 @@ Software externos:
 * Para vizualizar porcentaje de coverage entregado por Jacoco, desde la carpeta raiz del proyecto dirigirse a ./target/site/jacoco/index.html y luego abrir el archivo index.html en un browser.
 
 > El proyecto debe estar levantado para poder ver el porcentaje
+
+![Coverage Jacoco](/data/coverage%20.png)
 
 ## Estructura de directorios
 
@@ -102,16 +104,16 @@ El proyecto se divide en 4 carpetas principales:
 * Domain: Se encuentran tanto los modelos como los servicios construidos.
 
 ## Diagrama de la solución
+
 ### Diagrama de arquitectura
+
 Para vizualizar el diagrama de arquitectura, dirigirse a este [link](https://drive.google.com/file/d/1EzXQ75O2VzY9N-TQLcjQDhW_zGDC5340/view?usp=sharing)
 
 ![DIAGRAMA DE ARQUITECTURA](/data/arquitectura.jpg)
 
-
-
 ### Diagrama de flujos
 
-Para vizualizar el diagrama de flujo de todos los flujos, lo puedes ver en el siguiente [link](https://drive.google.com/file/d/1EzXQ75O2VzY9N-TQLcjQDhW_zGDC5340/view?usp=sharing)
+Para vizualizar el diagrama de flujo de todos los flujos, lo puedes ver en el siguiente [link](https://drive.google.com/file/d/1G7yQKp4v0g5qGt4WCU0uLASCFlLECOHF/view?usp=sharing)
 
 Flujo Get Pi Random
 ![Flujo Pi Random](/data/flujo1.jpg)
@@ -203,17 +205,24 @@ En caso de tener cualquier problema con el makefile, levantar el proyecto de for
 
 ## Test de performance
 
-Se ha dejado un script con pruebas de cargar de las tres funciones requeridas. Para correr los test de carga:
+Se ha dejado un script con pruebas de carga de las tres funciones requeridas. Para correr los test de carga:
 
 Ingresar desde la raiz del proyecto a la carpeta k6 y ejecutar el siguiente comando:
 
-Desde powershell de windows
+Desde powershell de Windows:
 <pre><code>cat test.js | docker run --network host --rm -i grafana/k6 run -</code></pre>
 
 Desde consola Unix:
+
 ```
 docker run --network host --rm -i grafana/k6 run -<test.js
+
+
 ```
+
+> Para que las pruebas funcionen, la aplicación debe estar corriendo
+
+> Las pruebas fueron probadas en ambiente Windows
 
 Ejemplo de salida tras pasar Test
 
@@ -222,7 +231,7 @@ default ✓ [ 100% ] 0/2 VUs  22s
 
      ✗ is status 409
       ↳  0% — ✓ 143 / ✗ 16265
-     ✓ is status 200
+expuest     ✓ is status 200
 
      checks.........................: 66.95% ✓ 32959       ✗ 16265
      data_received..................: 14 MB  627 kB/s
@@ -243,6 +252,15 @@ default ✓ [ 100% ] 0/2 VUs  22s
      vus_max........................: 2      min=2         max=2
 
 ```
+
 ## Seguridad de la API
 
-> This block quote is here for your information
+Si su API la quisiéramos exponer de manera pública:
+* ¿Qué componentes usarías para securitizar tu API?.
+
+  Los componentes a utilizar serían restringir los accesos a la API mediante JWT a través de su autenticador y autorizador o a través de una APIKEY.
+* ¿Cómo asegurarías tu API desde el ciclo de vida de desarrollo?
+
+  La forma sería que en cada construcción de componentes nuevos dentro de la APi, poder generar pruebas unitarias, tambien se puede generar un pipeline de CI/CD para verificar y corroborar variables y secretos expuestos(hardcodeados) en el código. Esto con el fin de que  en cada incremento de la aplicación se pueda mantener las buenas prácticas y validaciones, tanto de pruebas unitarias como de vulnerabilidades de codigo.
+
+  Por último cambiar los puertos por defectos que ofrecen los diferentes servicios (DB, APIS, etc)
