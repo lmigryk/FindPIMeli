@@ -4,6 +4,8 @@ import com.example.meli.commons.dto.DtoResponseDelete;
 import com.example.meli.commons.exception.DeleteException;
 import com.example.meli.commons.constants.ExceptionEnum;
 import com.example.meli.commons.utils.SerialPi;
+import com.example.meli.commons.utils.UtilFunction;
+import com.example.meli.commons.validator.RandomValidImp;
 import com.example.meli.domain.models.BasePi;
 
 import org.springframework.cache.Cache;
@@ -19,17 +21,23 @@ import java.math.RoundingMode;
 @Validated
 @Service
 public class PiServiceImp implements PiService {
-
-    private final CacheManager cacheManager ;
+    private  UtilFunction util;
+    private  RandomValidImp randomValidImp;
+    private  CacheManager cacheManager ;
     private final DtoResponseDelete response = new DtoResponseDelete();
 
-    public PiServiceImp(CacheManager cacheManager) {
+    public PiServiceImp(CacheManager cacheManager, UtilFunction utilFunction, RandomValidImp randomValidImp) {
+
         this.cacheManager = cacheManager;
+        this.randomValidImp = randomValidImp;
+        this.util = utilFunction;
     }
     @Override
-    @Cacheable(cacheNames = "number_pi", key = "#random" ,unless = "#result == null")
-    public BasePi getPiRandom(int random) {
-        System.out.println("No estaba creado " + random + " se creará ");
+    @Cacheable(cacheNames = "number_pi", key = "#inputUser" ,unless = "#result == null")
+    public BasePi getPiRandom(int inputUser) {
+        System.out.println("No estaba creado " + inputUser + " se creará ");
+        int random = util.calculatedRandom(inputUser);
+        randomValidImp.validator(random);
         return calculatedPi(random);
     }
     @Override
